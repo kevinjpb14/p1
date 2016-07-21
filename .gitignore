@@ -1,12 +1,86 @@
-*.class
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+package ordenamiento;
+import java.io.*;
+public class Shell 
+{
+    static int[] vec={50,5,6,7,1,2,20,9,30};
+    static int[] vec1;
+//    public void ingresar() throws IOException
+//    {
+//        BufferedReader ingreso = new BufferedReader(new InputStreamReader(System.in));
+//        vec1=new int[10];
+//        int dato;
+//        for(int i=0;i<vec1.length;i++)
+//        {
+//            System.out.println("Ingrese dato para posicion"+i);
+//            dato=Integer.parseInt(ingreso.readLine());
+//            vec1[i]=dato;
+//        }
+//        
+//           
+//        
+//    }
+    public void ordenar_Shell()
+    {
+            int tam_tot = vec.length;
+            int salto = tam_tot;
+            boolean camb;
+            while(salto > 1) 
+            {
+                salto=salto/2;
+                 do{
+                        camb=true;
+                        for(int i=0;i<=tam_tot-1-salto;i++) 
+                        {
+                            int j=i+salto;
+                            if(vec[i] > vec[j]) 
+                            {
+                                int aux = vec[i];
+                                vec[i] = vec[j];
+                                vec[j] = aux;
+                                
+                                camb = false;
+                            }
+                            imprimir();
+                        }
+                    } while (!camb);
+            }
+    }
+//           System.out.println("ordenado queda");
+//           for(int j=0;j<vec.length;j++)
+//           {
+//               System.out.print(vec[j]+"\t");
+//           }
+     public void imprimir(){
+        int i;
+ 
+        if(vec.length>0)
+        {
+            for(i=0;vec.length>i;i++)
+            {
+            System.out.print(vec[i]+"\t");
+            }
+            System.out.println();
+        }
+        else System.out.println("Esta Vacio");
+    }
+    public void cambio(int[]vec,int pos_act,int pos_fin)
+    {
+        int t;
+        t=vec[pos_act];
+        vec[pos_act]=vec[pos_fin];
+        vec[pos_fin]=t;
+    }
+    
+    public static void main(String[] args) throws IOException 
+    {
+        Shell leer = new Shell();
+//        leer.ingresar();//quitar comentarios en caso de querer ingresas nuestros propios numeros
+        leer.imprimir();
+        leer.ordenar_Shell();
+        System.out.println("DESPUES DE ORDENAR");
+        leer.imprimir();
+    }
+}
+    
 
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
